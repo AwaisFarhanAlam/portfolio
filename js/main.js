@@ -53,13 +53,37 @@ const fadeElements = document.querySelectorAll('.fade-in');
 const typingText = document.getElementById('typing-text');
 
 // Theme toggle functionality
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.classList.add('dark');
+themeToggle.addEventListener('click', () => {
+  
+  themeToggling();      
+
+});
+
+function themeToggling(){
+  if(localStorage.getItem("theme")==="dark"){
+localStorage.setItem("theme","light");
+ document.documentElement.classList.remove('dark');
+    }else{
+localStorage.setItem("theme","dark");
+document.documentElement.classList.add('dark');
+    }
 }
 
-themeToggle.addEventListener('click', () => {
-    document.documentElement.classList.toggle('dark');
-});
+function theme(){
+if(!localStorage.getItem("theme")){
+    localStorage.setItem("theme","dark");
+    document.documentElement.classList.add('dark');
+    return;
+}
+
+if(localStorage.getItem("theme")==="dark")
+    document.documentElement.classList.add('dark');
+if(localStorage.getItem("theme")==="light")
+    document.documentElement.classList.remove('dark');
+    
+}
+
+theme();
 
 // Mobile menu toggle
 mobileMenuButton.addEventListener('click', () => {
